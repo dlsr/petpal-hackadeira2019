@@ -1,6 +1,6 @@
 var mqtt;
 var reconnectTimeout = 2000;
-var host = "broker.hivemq.com";
+var host = "wss://key:secret@broker.hivemq.com";
 var port = 8000;
 
 $(document).ready(function () {
@@ -13,17 +13,12 @@ $(document).ready(function () {
         sendFood();
     });
 
-
-
     updateBowls();
 
 });
 
 function sendWater() {
     //$('#waterProgressBar').width("50%");
-
-
-
 }
 
 function onConnect() {
