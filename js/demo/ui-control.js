@@ -13,7 +13,7 @@ $(document).ready(function () {
         sendFood();
     });
 
-    
+
 
     updateBowls();
 
@@ -21,13 +21,13 @@ $(document).ready(function () {
 
 function sendWater() {
     //$('#waterProgressBar').width("50%");
-  
-    MQTTconnect();
+
+
 
 }
 
 function onConnect() {
-    
+
     message = new Paho.MQTT.Message("Hello World");
     message.destinationName = "gsf4-servo";
     console.log("connected");
@@ -44,7 +44,7 @@ function MQTTconnect() {
 }
 
 function sendFood() {
-    //alert('button clicked');
+    MQTTconnect();
 }
 
 function updateBowls() {
