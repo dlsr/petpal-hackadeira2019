@@ -1,6 +1,6 @@
 var mqtt;
 var reconnectTimeout = 2000;
-var host = "wss://key:secret@broker.hivemq.com";
+var host = "wss://broker.hivemq.com";
 var port = 8000;
 
 $(document).ready(function () {
