@@ -22,10 +22,10 @@
 
 </head>
 
-<body id="page-top" >
+<body id="page-top">
 
   <!-- Page Wrapper -->
-  <div id="wrapper" >
+  <div id="wrapper">
 
     <!-- Sidebar -->
     <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion toggled" id="accordionSidebar">
@@ -274,13 +274,6 @@
                 class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
           </div>
 
-          <!-- Row Botões Sensores -->
-          <div class="row">
-
-
-
-          </div>
-
           <!-- Content Row -->
 
           <div class="row">
@@ -319,7 +312,20 @@
                         <div class="h5 mb-0 font-weight-bold text-gray-800">150ml</div>
                       </div>
                       <div class="col-auto">
-                        <button id="sendWater" type="button" class="btn btn-outline-primary">Enviar</button>
+                        <button id="sendWaterButton" type="button"
+                          class="btn btn-outline-primary actuatorsButtons">Enviar</button>
+                        <div class="alert alert-danger" role="alert" style="display:none;">
+                          Restabelecendo conexão...
+                        </div>
+
+                        <div id="alertWaterSucess" class="alert alert-success" role="alert" style="display:none;">
+                          A água foi reposta com sucesso.
+                        </div>
+
+                        <div class="spinner-border text-primary loading" role="status" style="display:none;">
+                          <span class="sr-only">Loading...</span>
+                        </div>
+
                       </div>
                     </div>
                   </div>
@@ -336,7 +342,17 @@
                         <div class="h5 mb-0 font-weight-bold text-gray-800">300g</div>
                       </div>
                       <div class="col-auto">
-                        <button id="sendFood" type="button" class="btn btn-outline-warning">Enviar</button>
+                        <button id="sendFoodButton" type="button"
+                          class="btn btn-outline-warning actuatorsButtons">Enviar</button>
+                        <div class="alert alert-danger" role="alert" style="display:none;">
+                          Restabelecendo conexão...
+                        </div>
+                        <div id="alerFoodSucess" class="alert alert-success" role="alert" style="display:none;">
+                          A ração foi reposta com sucesso.
+                        </div>
+                        <div class="spinner-border text-warning loading" role="status" style="display:none;">
+                          <span class="sr-only">Loading...</span>
+                        </div>
                       </div>
                     </div>
                   </div>

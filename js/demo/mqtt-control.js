@@ -13,8 +13,16 @@ var currentActuatorTopic = "";
 // Sensors
 var sensorWaterTopic = "gsf4-water_pot";
 var sensorFoodTopic = "lps6-press";
+var currentType = "";
 
-function retrieveBowlsPercent() {
+function retrieveBowlsPercent(type) {
+    //console.log(type);
+    if (type == "food") {
+        currentType = sensorFoodTopic;
+    } else {
+        currentType = sensorWaterTopic;
+    }
+
     mqttConnectSensor();
 }
 
@@ -33,6 +41,7 @@ function onConnectActuator() {
     message = new Paho.MQTT.Message("Hello World");
     message.destinationName = currentActuatorTopic;
     console.log("Connected Actuator: " + currentActuatorTopic);
+    //hideButtonsLoading();
     mqtt.send(message);
 }
 
@@ -46,14 +55,23 @@ function mqttConnectSensor() {
 function onConnectSensor() {
     message = new Paho.MQTT.Message("Hello World");
     console.log("Connected Sensor");
-    mqtt.subscribe(sensorFoodTopic);
+    hideButtonsLoading();
+    mqtt.subscribe(currentType);
 }
 
 function onFailureSensor(message) {
-    console.log("Falhou, reconectando...");
+
+    //alert("Falhou");
+    //showAlertDanger();
+    console.log("Restabelecendo conexão...");
     setTimeout(mqttConnectSensor, reconnectTimeout * 1000);
 }
 
 function onMessageArrived(msg) {
-    setFoodBowlPercent(msg.payloadString);
+    //console.log(currentType);
+    if (currentType == sensorFoodTopic) {
+        setFoodBowlPercent(msg.payloadString);
+    } else {
+        setWaterBowlPercent(msg.payloadString);
+    }
 }

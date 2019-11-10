@@ -1,19 +1,49 @@
 var foodBowlPercent = "0";
-var updateBowlsTimerSeconds = 2;
+var waterBowlPercent = "0";
+var updateBowlsTimerSeconds = 5;
+var flag = true;
 
 $(document).ready(function () {
 
-    $("#sendWater").click(function () {
+    $("#sendWaterButton").click(function () {
         sendWater();
+        showButtonsLoading();
     });
 
-    $("#sendFood").click(function () {
+    $("#sendFoodButton").click(function () {
         sendFood();
+        showButtonsLoading();
     });
 
     updateBowlsUI();
 
 });
+
+function showButtonsLoading() {
+    $(".loading").show();
+    $(".actuatorsButtons").hide();
+    $(".actuatorsButtons").hide();
+}
+
+function showAlertDanger() {
+    $(".alert-danger").show();
+    $(".actuatorsButtons").hide();
+    //$(".actuatorsButtons").hide();
+}
+
+function showAlertSuccess() {
+    $(".alert-danger").show();
+    //$(".actuatorsButtons").hide();
+}
+
+function hideButtonsLoading() {
+    $(".loading").hide();
+    $(".actuatorsButtons").show();
+}
+
+function hideSendButtons() {
+    $(".sendFoodButton").show();
+}
 
 function sendWater() {
     sendMessageActuator("water");
@@ -24,11 +54,25 @@ function sendFood() {
 }
 
 function setFoodBowlPercent(value) {
+    //console.log("Food: " + value);
     foodBowlPercent = value;
 }
 
+function setWaterBowlPercent(value) {
+    //console.log("Water: " + value);
+    waterBowlPercent = value;
+}
+
 function updateBowlsUI() {
-    retrieveBowlsPercent();
+
+    if (flag) {
+        retrieveBowlsPercent("water");
+    } else {
+        retrieveBowlsPercent("food");
+    }
+
+    flag = !flag;
+
     setProgressBarValues();
     setTimeout(function () {
         updateBowlsUI();
@@ -36,8 +80,10 @@ function updateBowlsUI() {
 }
 
 function setProgressBarValues() {
-    var waterValue = "10%";
-    var foodPercent = foodBowlPercent + "%";
+
+    var waterValue = parseFloat(waterBowlPercent).toFixed(2) + "%";
+    var foodPercent = parseFloat(foodBowlPercent).toFixed(2) + "%";
+
     $('#waterProgressBar').width(waterValue);
     $("#waterPercentualText").text(waterValue);
 
