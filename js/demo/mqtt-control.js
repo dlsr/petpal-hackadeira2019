@@ -1,10 +1,9 @@
 var mqtt;
 var reconnectTimeout = 2;
 var host = "broker.hivemq.com";
-//var port = 8000;
-var port = 443;
+var port = 8000;
 
-var sslFlag = true;
+var sslFlag = false;
 
 // Actuators
 var actuatorFoodTopic = "gsf4-servo";
