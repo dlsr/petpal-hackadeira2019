@@ -1,6 +1,6 @@
 var foodBowlPercent = "0";
 var waterBowlPercent = "0";
-var updateBowlsTimerSeconds = 1;
+var updateBowlsTimerSeconds = 2;
 var flag = true;
 var foodTank = 0;
 var waterTank = 0;
