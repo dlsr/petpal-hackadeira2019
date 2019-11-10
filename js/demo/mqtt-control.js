@@ -1,7 +1,7 @@
 var mqtt;
 var reconnectTimeout = 2;
 var host = "broker.hivemq.com";
-var port = 8081;
+var port = 8000;
 
 var sslFlag = true;
 
