@@ -1,7 +1,4 @@
-var mqtt;
-var reconnectTimeout = 2000;
-var host = "broker.hivemq.com";
-var port = 8000;
+var foodBowlPercent = "0";
 
 $(document).ready(function () {
 
@@ -12,44 +9,37 @@ $(document).ready(function () {
     $("#sendFood").click(function () {
         sendFood();
     });
-
-    updateBowls();
-
+    //updateBowlsUI();
+    updateBowlsUI();
 });
 
 function sendWater() {
-    //$('#waterProgressBar').width("50%");
-}
-
-function onConnect() {
-
-    message = new Paho.MQTT.Message("Hello World");
-    message.destinationName = "gsf4-servo";
-    console.log("connected");
-    mqtt.send(message);
-}
-
-function MQTTconnect() {
-    console.log('...');
-    mqtt = new Paho.MQTT.Client(host, port, "clientjs");
-
-    var options = { timeout: 3, onSuccess: onConnect, };
-
-    mqtt.connect(options);
+    sendMessageActuator("water");
 }
 
 function sendFood() {
-    MQTTconnect();
+    sendMessageActuator("food");
 }
 
-function updateBowls() {
+function setFoodBowlPercent(value) {
+    foodBowlPercent = value;
+}
+
+function updateBowlsUI() {
+    retrieveBowlsPercent();
+    setProgressBarValues();
+    setTimeout(function () {
+        updateBowlsUI();
+    }, 1000);
+}
+
+function setProgressBarValues() {
     var waterValue = "10%";
-    var foodValue = "70%";
 
-    $("#waterPercentualText").text(waterValue);
     $('#waterProgressBar').width(waterValue);
+    $("#waterPercentualText").text(waterValue);
 
-    $('#foodProgressBar').width(foodValue);
-    $("#foodPercentualText").text(foodValue);
+    $('#foodProgressBar').width(foodBowlPercent);
+    $("#foodPercentualText").text(foodBowlPercent);
 
 }
