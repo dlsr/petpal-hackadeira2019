@@ -1,5 +1,5 @@
 var mqtt;
-var reconnectTimeout = 2000;
+var reconnectTimeout = 2;
 var host = "broker.hivemq.com";
 var port = 8000;
 
@@ -13,12 +13,6 @@ var currentActuatorTopic = "";
 // Sensors
 var sensorWaterTopic = "gsf4-water_pot";
 var sensorFoodTopic = "lps6-press";
-
-var currentFoodBowlPercent = 0;
-
-// $(document).ready(function () {
-//     mqttConnectSensor();
-// });
 
 function retrieveBowlsPercent() {
     mqttConnectSensor();
@@ -66,10 +60,9 @@ function onConnectSensor() {
 function onFailureSensor(message) {
 
     console.log("Falhou, reconectando...");
-    setTimeout(mqttConnectSensor, reconnectTimeout);
+    setTimeout(mqttConnectSensor, reconnectTimeout * 1000);
 }
 
 function onMessageArrived(msg) {
     setFoodBowlPercent(msg.payloadString);
-    //console.log(currentFoodBowlPercent);
 }

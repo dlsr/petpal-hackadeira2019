@@ -1,4 +1,5 @@
 var foodBowlPercent = "0";
+var updateBowlsTimerSeconds = 2;
 
 $(document).ready(function () {
 
@@ -9,7 +10,7 @@ $(document).ready(function () {
     $("#sendFood").click(function () {
         sendFood();
     });
-    //updateBowlsUI();
+
     updateBowlsUI();
 });
 
@@ -30,16 +31,16 @@ function updateBowlsUI() {
     setProgressBarValues();
     setTimeout(function () {
         updateBowlsUI();
-    }, 1000);
+    }, updateBowlsTimerSeconds * 1000);
 }
 
 function setProgressBarValues() {
     var waterValue = "10%";
-
+    var foodPercent = foodBowlPercent + "%";
     $('#waterProgressBar').width(waterValue);
     $("#waterPercentualText").text(waterValue);
 
-    $('#foodProgressBar').width(foodBowlPercent);
-    $("#foodPercentualText").text(foodBowlPercent);
+    $('#foodProgressBar').width(foodPercent);
+    $("#foodPercentualText").text(foodPercent);
 
 }
